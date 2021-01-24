@@ -12,7 +12,7 @@ def main(args):
     compose_file = BazelComposeFile(cwd=str(cwd))
     compose = DockerCompose(compose_file)
 
-    if args.everything:
+    if args.start_everything:
         print("Attempting to start up all services....")
         compose.up(output_logs=True)
 
@@ -30,7 +30,12 @@ def main(args):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument("cwd", help="Current working directory for all subcommands", default=".")
-    parser.add_argument("--everything", help="Current working directory for all subcommands", default=True, type=bool)
-    parser.add_argument("--follow", help="Tail the logs of a specific subset of containers", nargs='*')
+    parser.add_argument("--cwd",              help="Current working directory for all subcommands",          default=".")
+
+    start_everything_parser = parser.add_mutually_exclusive_group(required=False)
+    start_everything_parser.add_argument('--start_everything',   dest='start_everything', action='store_true')
+    start_everything_parser.add_argument('--nostart_everything', dest='start_everything', action='store_false')
+    parser.set_defaults(start_everything=False)
+
+    parser.add_argument("--follow",           help="Tail the logs of a specific subset of containers", nargs='*')
     main(parser.parse_args())
