@@ -47,11 +47,14 @@ your IDE to bazel, though, this should not be a problem as the IDE makes the sam
 
    ```shell script
    sudo apt install python3
-   sudo curl -L "https://github.com/gravypod/bazel_compose/releases/download/untagged-b1e11a908485ef6d128d/bazel_compose.par" -o /usr/local/bin/docker-compose
+   git clone git@github.com:gravypod/bazel_compose.git
+   cd bazel_compose
+   bazel build //caper/bazel_compose:bazel_compose.par
+   sudo cp bazel-bin/caper/bazel_compose/bazel_compose.par /usr/local/bin/bazel-compose
    sudo chmod +x /usr/local/bin/bazel-compose
    ```
 
-3. Profit
+3. `cd` into your workspace and run `bazel-compose` to start everthing. 
 
 ## Implementation
 
