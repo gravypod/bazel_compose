@@ -17,8 +17,13 @@ services:
 Now run the following command:
 
 ```shell script
+# From Bazel
 bazel run //caper/bazel_compose -- $PWD
 bazel run //caper/bazel_compose -- $PWD --follow <container> # Only tails logs of specific container
+
+# From binary as installed below
+bazel-compose
+bazel-compose --follow <container> # Only tails logs of a specific container
 ```
 
 After a few moments you will see the logs from your container. Your container (`//something`) has just been built &
@@ -38,7 +43,14 @@ your IDE to bazel, though, this should not be a problem as the IDE makes the sam
    sudo mv ibazel /usr/local/bin/ibazel
    ```
 
-2. ???
+2. Install `bazel-compose`
+
+   ```shell script
+   sudo apt install python3
+   sudo curl -L "https://github.com/gravypod/bazel_compose/releases/download/untagged-b1e11a908485ef6d128d/bazel_compose.par" -o /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/bazel-compose
+   ```
+
 3. Profit
 
 ## Implementation
