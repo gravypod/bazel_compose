@@ -1,0 +1,8 @@
+version: '2.2'
+services:
+  example:
+    image: //caper/example
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - proxy
